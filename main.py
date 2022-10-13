@@ -23,11 +23,9 @@ time.sleep(2)
 driver.execute_script('return document.querySelector("#L2AGLb > div")').click()
 
 box = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")))
-box = driver.find_element(by=By.XPATH, value="/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")
 box.send_keys("Python")
 
 button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[3]/center/input[1]")))
-button = driver.find_element(by=By.XPATH, value="/html/body/div[1]/div[3]/form/div[1]/div[1]/div[3]/center/input[1]")
 button.click()
 
 #box.send_keys(Keys.RETURN)
