@@ -9,17 +9,17 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 PATH = "C:\Program Files (x86)\chromedriver.exe"
 driver = webdriver.Chrome(PATH)
+driver.implicitly_wait(2.0)
+
 
 wait = WebDriverWait(driver, timeout=10, poll_frequency=1, ignored_exceptions=[])
 
-driver.implicitly_wait(2.0)
 
 driver.get("https://google.com")
 
 time.sleep(0.5)
 
 #Accept the agreement
-time.sleep(2)
 driver.execute_script('return document.querySelector("#L2AGLb > div")').click()
 
 box = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")))
