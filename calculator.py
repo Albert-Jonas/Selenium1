@@ -2,8 +2,11 @@ import random
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver import ChromeOptions
 import time
 
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--lang= hu")
 
 def test(a,b,muvelet):
     for i in str(a):
@@ -25,5 +28,20 @@ time.sleep(2)
 
 # test(1,2,"Összeadás")
 
-test(random.randint(0,9999999),random.randint(0,999999),"Kivonás")
+test(random.randint(0,9999999),random.randint(0,999999),"Minus")
 # time.sleep(10)
+
+
+def osszeadas_pozitiv_szamokkal():
+
+    #böngésző felállítása
+
+    #meghajtjuk a böngészőt
+    test(2,3,"Plus")
+
+    #ellenőrzés
+    #segédfüggvény kell, ami kiszedi az eredményt a weboldalról és return-el visszaadja
+    #segédfüggvény() == 5
+    #összerakjuk a választ: kiíratjuk, hogy "osszeadas_pozitiv_szamokkal pass/fail fail esetben magyarázat
+
+    #böngésző bezárása
