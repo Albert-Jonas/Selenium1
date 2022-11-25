@@ -2,6 +2,7 @@ import random
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import pytest
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--lang= hu")
@@ -42,14 +43,15 @@ def eredmeny():
 # test(random.randint(0,9999999),random.randint(0,999999),"Kivonás")
 # time.sleep(10)
 
-def osszeadas_pozitiv_szamokkal(szam1, szam2):
+def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3):
 
     time.sleep(2)
     test(szam1, szam2,"Összeadás")
     time.sleep(2)
     eredmenystr = eredmeny()
-    print(eredmenystr)
-
+    # print(eredmenystr)
+    # return eredmenystr
+    assert szam3 == eredmenystr,"Hibás"
   # Bésző felállítása
 
     #meghajtjuk a böngészőt
@@ -67,6 +69,7 @@ def osszeadas_pozitiv_szamokkal(szam1, szam2):
 driver = startBrowser()
 
 # osszeadas_pozitiv_szamokkal(random.randint(1,9999999),random.randint(1,999999))
-osszeadas_pozitiv_szamokkal(10,20)
-
-# driver.close()
+# osszeadas_pozitiv_szamokkal(10,20)
+# assert "30" == osszeadas_pozitiv_szamokkal(10,20,30)
+osszeadas_pozitiv_szamokkal(10,20,"31")
+driver.close()
