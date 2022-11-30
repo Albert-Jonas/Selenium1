@@ -23,39 +23,17 @@ def test(a,b,muvelet):
         driver.find_element(By.CSS_SELECTOR, "span[aria-label='{}']".format(i)).click()
 
 def eredmeny():
-
     vissza = driver.find_elements(By.XPATH, "/html/body/div[2]/div/div[2]/div/div/div/div[1]/div[2]/div[1]/div[5]/div[2]/div[1]")
-    # print(vissza.text)
-    strErtak = ''
+    strErtek = ""
     for Item in vissza:
-        strErtak += Item.text
-
-    return strErtak[1:]
+        strErtek += Item.text
+    return strErtek[1:]
 
 # driver.maximize_window()
-
-# time.sleep(2)
-
-# Ide kell az ellenőrző lépés
-
-# test(1,2,"Összeadás")
-
 # test(random.randint(0,9999999),random.randint(0,999999),"Kivonás")
 # time.sleep(10)
 
-def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3):
 
-    time.sleep(2)
-    test(szam1, szam2,"Összeadás")
-    time.sleep(2)
-    eredmenystr = eredmeny()
-    # print(eredmenystr)
-    # return eredmenystr
-    assert szam3 == eredmenystr,"Hibás"
-  # Bésző felállítása
-
-    #meghajtjuk a böngészőt
-    # test(2,3,"Plus")
 
 
 
@@ -66,10 +44,52 @@ def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3):
 
     #böngésző bezárása
 
-driver = startBrowser()
+
 
 # osszeadas_pozitiv_szamokkal(random.randint(1,9999999),random.randint(1,999999))
 # osszeadas_pozitiv_szamokkal(10,20)
 # assert "30" == osszeadas_pozitiv_szamokkal(10,20,30)
-osszeadas_pozitiv_szamokkal(10,20,"31")
-driver.close()
+def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3):
+
+    time.sleep(2)
+    test(szam1, szam2,"Összeadás")
+    time.sleep(2)
+    eredmenystr = eredmeny()
+    assert szam3 == eredmenystr,"Hibás"
+def kivonas_pozitiv_szamokkal(szam1, szam2, szam3):
+    time.sleep(2)
+    test(szam1, szam2, "Kivonás")
+    time.sleep(2)
+    eredmenystr = eredmeny()
+    assert szam3 == eredmenystr, "Hibás"
+def szorzas_pozitiv_szamokkal(szam1, szam2, szam3):
+    time.sleep(2)
+    test(szam1, szam2, "Szorzás")
+    time.sleep(2)
+    eredmenystr = eredmeny()
+    assert szam3 == eredmenystr, "Hibás"
+def osztas_pozitiv_szamokkal(szam1, szam2, szam3):
+    time.sleep(2)
+    test(szam1, szam2, "Osztás")
+    time.sleep(2)
+    eredmenystr = eredmeny()
+    assert szam3 == eredmenystr, "Hibás"
+
+
+def clear():
+    driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div/div/div[3]/div[1]/div/div[7]").click()
+
+driver = startBrowser()
+osszeadas_pozitiv_szamokkal(10,20,"30")
+clear()
+kivonas_pozitiv_szamokkal(20,10,"10")
+clear()
+szorzas_pozitiv_szamokkal(10,20,"200")
+clear()
+osztas_pozitiv_szamokkal(10,20,"0.5")
+
+
+
+
+
+# driver.close()
