@@ -2,10 +2,13 @@ import random
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import pytest
+from openpyxl import Workbook, load_workbook
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--lang= hu")
+
+wb = load_workbook('excel.xlsx')
+ws = wb["Összeadás"]
 
 def startBrowser():
     driver = webdriver.Chrome()
@@ -50,12 +53,18 @@ def eredmeny():
 # osszeadas_pozitiv_szamokkal(10,20)
 # assert "30" == osszeadas_pozitiv_szamokkal(10,20,30)
 def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3):
-
     time.sleep(2)
-    test(szam1, szam2,"Összeadás")
+    test(szam1, szam2, "Plus")
     time.sleep(2)
     eredmenystr = eredmeny()
-    assert szam3 == eredmenystr,"Hibás"
+
+    try:
+        assert szam3 == "\"" + eredmenystr + "\"", "Hibás"
+        ws['F3'] = "Pass"
+    except AssertionError:
+        return
+
+
 def kivonas_pozitiv_szamokkal(szam1, szam2, szam3):
     time.sleep(2)
     test(szam1, szam2, "Kivonás")
@@ -80,16 +89,18 @@ def clear():
     driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div/div/div[3]/div[1]/div/div[7]").click()
 
 driver = startBrowser()
-osszeadas_pozitiv_szamokkal(10,20,"30")
+#osszeadas_pozitiv_szamokkal(10,20,"30")
+#clear()
+#kivonas_pozitiv_szamokkal(20,10,"10")
+#clear()
+#szorzas_pozitiv_szamokkal(10,20,"200")
+#clear()
+#osztas_pozitiv_szamokkal(10,20,"0.5")
+#clear()
+
+osszeadas_pozitiv_szamokkal(ws['B3'].value, ws['C3'].value, ws['D3'].value)
 clear()
-kivonas_pozitiv_szamokkal(20,10,"10")
-clear()
-szorzas_pozitiv_szamokkal(10,20,"200")
-clear()
-osztas_pozitiv_szamokkal(10,20,"0.5")
 
-
-
-
+wb.save('excel.xlsx')
 
 # driver.close()
