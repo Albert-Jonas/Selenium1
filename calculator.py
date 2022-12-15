@@ -60,9 +60,12 @@ def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3):
 
     try:
         assert szam3 == "\"" + eredmenystr + "\"", "Hibás"
+    except AssertionError as e:
+        ws['F3'] = "Fail"
+        ws['G3'] = str(e)
+    else:
         ws['F3'] = "Pass"
-    except AssertionError:
-        return
+
 
 
 def kivonas_pozitiv_szamokkal(szam1, szam2, szam3):
