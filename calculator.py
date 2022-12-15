@@ -52,7 +52,7 @@ def eredmeny():
 # osszeadas_pozitiv_szamokkal(random.randint(1,9999999),random.randint(1,999999))
 # osszeadas_pozitiv_szamokkal(10,20)
 # assert "30" == osszeadas_pozitiv_szamokkal(10,20,30)
-def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3):
+def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
     test(szam1, szam2, "Plus")
     time.sleep(2)
@@ -61,10 +61,10 @@ def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3):
     try:
         assert str(szam3) == eredmenystr, "Hibás"
     except AssertionError as e:
-        ws['F3'] = "Fail"
-        ws['G3'] = str(e)
+        ws['F' + str(i)] = "Fail"
+        ws['G' + str(i)] = str(e)
     else:
-        ws['F3'] = "Pass"
+        ws['F' + str(i)] = "Pass"
 
 
 
@@ -101,8 +101,11 @@ driver = startBrowser()
 #osztas_pozitiv_szamokkal(10,20,"0.5")
 #clear()
 
-osszeadas_pozitiv_szamokkal(ws['B3'].value, ws['C3'].value, ws['D3'].value)
-clear()
+i = 3
+while(ws['B'+str(i)].value):
+    osszeadas_pozitiv_szamokkal(ws['B'+str(i)].value, ws['C'+str(i)].value, ws['D'+str(i)].value, i)
+    i = i + 1
+    clear()
 
 wb.save('excel.xlsx')
 
