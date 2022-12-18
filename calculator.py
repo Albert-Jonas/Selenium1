@@ -54,7 +54,7 @@ def eredmeny():
 # assert "30" == osszeadas_pozitiv_szamokkal(10,20,30)
 def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
-    test(szam1, szam2, "Plus")
+    test(szam1, szam2, "Összeadás")
     time.sleep(2)
     eredmenystr = eredmeny()
 
@@ -91,6 +91,9 @@ def osztas_pozitiv_szamokkal(szam1, szam2, szam3):
 def clear():
     driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div/div/div[3]/div[1]/div/div[7]").click()
 
+
+
+
 driver = startBrowser()
 #osszeadas_pozitiv_szamokkal(10,20,"30")
 #clear()
@@ -101,6 +104,15 @@ driver = startBrowser()
 #osztas_pozitiv_szamokkal(10,20,"0.5")
 #clear()
 
+def excelReset():
+    i=3
+    while (ws['B' + str(i)].value):
+        ws['F' + str(i)] = " "
+        ws['G' + str(i)] = str(" ")
+        i = i + 1
+
+
+excelReset()
 i = 3
 while(ws['B'+str(i)].value):
     osszeadas_pozitiv_szamokkal(ws['B'+str(i)].value, ws['C'+str(i)].value, ws['D'+str(i)].value, i)
@@ -108,5 +120,5 @@ while(ws['B'+str(i)].value):
     clear()
 
 wb.save('excel.xlsx')
-
+driver.close()
 # driver.close()
