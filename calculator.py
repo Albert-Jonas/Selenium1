@@ -52,19 +52,29 @@ def eredmeny():
 # osszeadas_pozitiv_szamokkal(random.randint(1,9999999),random.randint(1,999999))
 # osszeadas_pozitiv_szamokkal(10,20)
 # assert "30" == osszeadas_pozitiv_szamokkal(10,20,30)
-def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3, i):
-    time.sleep(2)
-    test(szam1, szam2, "Összeadás")
-    time.sleep(2)
-    eredmenystr = eredmeny()
-
+def biralat(szam3, eredmenystr):
     try:
-        assert str(szam3) == eredmenystr, "Hibás"
+        assert str(szam3)  == eredmenystr, "Hibás"
     except AssertionError as e:
         ws['F' + str(i)] = "Fail"
         ws['G' + str(i)] = str(e)
     else:
         ws['F' + str(i)] = "Pass"
+
+
+def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3, i):
+    time.sleep(2)
+    test(szam1, szam2, "Összeadás")
+    time.sleep(2)
+    eredmenystr = eredmeny()
+    biralat(szam3, eredmenystr)
+    # try:
+    #     assert str(szam3) == eredmenystr, "Hibás"
+    # except AssertionError as e:
+    #     ws['F' + str(i)] = "Fail"
+    #     ws['G' + str(i)] = str(e)
+    # else:
+    #     ws['F' + str(i)] = "Pass"
 
 
 
