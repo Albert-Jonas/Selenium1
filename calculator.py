@@ -52,7 +52,7 @@ def eredmeny():
 # osszeadas_pozitiv_szamokkal(random.randint(1,9999999),random.randint(1,999999))
 # osszeadas_pozitiv_szamokkal(10,20)
 # assert "30" == osszeadas_pozitiv_szamokkal(10,20,30)
-def biralat(szam3, eredmenystr):
+def biralat(szam3, eredmenystr, i):
     try:
         assert str(szam3)  == eredmenystr, "Hibás"
     except AssertionError as e:
@@ -67,7 +67,7 @@ def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     test(szam1, szam2, "Összeadás")
     time.sleep(2)
     eredmenystr = eredmeny()
-    biralat(szam3, eredmenystr)
+    biralat(szam3, eredmenystr,i)
     # try:
     #     assert str(szam3) == eredmenystr, "Hibás"
     # except AssertionError as e:
@@ -78,12 +78,14 @@ def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3, i):
 
 
 
-def kivonas_pozitiv_szamokkal(szam1, szam2, szam3):
+def kivonas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
     test(szam1, szam2, "Kivonás")
     time.sleep(2)
     eredmenystr = eredmeny()
-    assert szam3 == eredmenystr, "Hibás"
+    biralat(szam3, eredmenystr, i)
+
+    # assert szam3 == eredmenystr, "Hibás"
 def szorzas_pozitiv_szamokkal(szam1, szam2, szam3):
     time.sleep(2)
     test(szam1, szam2, "Szorzás")
@@ -118,16 +120,41 @@ def excelReset():
     i=3
     while (ws['B' + str(i)].value):
         ws['F' + str(i)] = " "
-        ws['G' + str(i)] = str(" ")
+        ws['G' + str(i)] = " "
         i = i + 1
 
 
+
 excelReset()
-i = 3
-while(ws['B'+str(i)].value):
-    osszeadas_pozitiv_szamokkal(ws['B'+str(i)].value, ws['C'+str(i)].value, ws['D'+str(i)].value, i)
-    i = i + 1
-    clear()
+
+
+muvelet = 2
+while(muvelet <=4):
+    print(muvelet)
+    match muvelet:
+        case 1:
+            ws = wb["Összeadás"]
+        case 2:
+            ws = wb["Kivonás"]
+        case 3:
+            ws = wb["Szorzás"]
+        case 4:
+            ws = wb["Osztás"]
+    print(ws)
+    i = 3
+    while(ws['B'+str(i)].value):
+        match muvelet:
+            case 1:
+                osszeadas_pozitiv_szamokkal(ws['B'+str(i)].value, ws['C'+str(i)].value, ws['D'+str(i)].value, i)
+            case 2:
+                kivonas_pozitiv_szamokkal(ws['B'+str(i)].value, ws['C'+str(i)].value, ws['D'+str(i)].value, i)
+            case 3:
+                pass
+            case 4:
+                pass
+        i = i + 1
+        clear()
+    muvelet = muvelet+1
 
 wb.save('excel.xlsx')
 driver.close()
