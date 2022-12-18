@@ -7,8 +7,7 @@ from openpyxl import Workbook, load_workbook
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--lang= hu")
 
-wb = load_workbook('excel.xlsx')
-ws = wb["Összeadás"]
+
 
 def startBrowser():
     driver = webdriver.Chrome()
@@ -86,19 +85,20 @@ def kivonas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     biralat(szam3, eredmenystr, i)
 
     # assert szam3 == eredmenystr, "Hibás"
-def szorzas_pozitiv_szamokkal(szam1, szam2, szam3):
+def szorzas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
     test(szam1, szam2, "Szorzás")
     time.sleep(2)
     eredmenystr = eredmeny()
-    assert szam3 == eredmenystr, "Hibás"
-def osztas_pozitiv_szamokkal(szam1, szam2, szam3):
+    biralat(szam3,eredmenystr, i)
+    # assert szam3 == eredmenystr, "Hibás"
+def osztas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
     test(szam1, szam2, "Osztás")
     time.sleep(2)
     eredmenystr = eredmeny()
-    assert szam3 == eredmenystr, "Hibás"
-
+    # assert szam3 == eredmenystr, "Hibás"
+    biralat(szam3, eredmenystr, i)
 
 def clear():
     driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div/div/div[3]/div[1]/div/div[7]").click()
@@ -116,7 +116,7 @@ driver = startBrowser()
 #osztas_pozitiv_szamokkal(10,20,"0.5")
 #clear()
 
-def excelReset():
+def excelReset(ws,wb):
     i=3
     while (ws['B' + str(i)].value):
         ws['F' + str(i)] = " "
@@ -125,21 +125,26 @@ def excelReset():
 
 
 
-excelReset()
+# excelReset()
 
-
-muvelet = 2
+wb = load_workbook('excel.xlsx')
+ws = wb["Összeadás"]
+muvelet = 1
 while(muvelet <=4):
     print(muvelet)
     match muvelet:
         case 1:
             ws = wb["Összeadás"]
+            excelReset(ws,wb)
         case 2:
             ws = wb["Kivonás"]
+            excelReset(ws, wb)
         case 3:
             ws = wb["Szorzás"]
+            excelReset(ws, wb)
         case 4:
             ws = wb["Osztás"]
+            excelReset(ws, wb)
     print(ws)
     i = 3
     while(ws['B'+str(i)].value):
@@ -149,9 +154,9 @@ while(muvelet <=4):
             case 2:
                 kivonas_pozitiv_szamokkal(ws['B'+str(i)].value, ws['C'+str(i)].value, ws['D'+str(i)].value, i)
             case 3:
-                pass
+                szorzas_pozitiv_szamokkal(ws['B'+str(i)].value, ws['C'+str(i)].value, ws['D'+str(i)].value, i)
             case 4:
-                pass
+                osztas_pozitiv_szamokkal(ws['B'+str(i)].value, ws['C'+str(i)].value, ws['D'+str(i)].value, i)
         i = i + 1
         clear()
     muvelet = muvelet+1
