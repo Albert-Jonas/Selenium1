@@ -93,9 +93,9 @@ driver = startBrowser()
 # tabla , site
 wb = load_workbook('excel.xlsx')
 ws = wb["Összeadás"]
-
-# müveleti jelzö (1-4)
 muvelet = 1
+# müveleti jelzö (1-4)
+
 # Művelet választó - Site hozzárendelés
 while(muvelet <=4):
     # print(muvelet)
