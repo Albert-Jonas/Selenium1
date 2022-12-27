@@ -92,7 +92,7 @@ def excelReset(ws,wb):
 driver = startBrowser()
 # tabla , site
 wb = load_workbook('excel.xlsx')
-ws = wb["Összeadás"]
+# ws = wb["Összeadás"]
 muvelet = 1
 # müveleti jelzö (1-4)
 
