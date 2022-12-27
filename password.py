@@ -1,3 +1,6 @@
+from random import random, randint
+
+
 def kisBetuk():
     return ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     # for i in lista:
@@ -10,17 +13,21 @@ def kulunlegesJelek():
    return ["^","&","@","#","$","-","_","!","$","%","~","?","=",">","<",".","*",";","+",":"]
 
 def elemszam():
-    pass
+    return 10
 
+def osszerak(jelek, hossz):
+    vissza = ""
+    for i in range(0,hossz):
+        elemSzam = randint(0,len(jelek))
+        db = jelek[elemSzam]
+        print(db)
+        vissza = vissza + db
+    return vissza
 
 jelek = kisBetuk()
 jelek = jelek +  nagyBetuk()
 jelek = jelek + szamok()
 jelek = jelek + kulunlegesJelek()
-
-
-
-hossz = elemszam()
-
-for i in jelek:
-    print(i)
+# hossz = elemszam()
+jelszo= osszerak(jelek, 10)
+print(jelszo)
