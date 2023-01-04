@@ -37,7 +37,7 @@ def szamok2():
     # jelkeszlet(jelek)
     while (kerdes not in "inIN"):
         kerdes = kerdesFG("Számokat tartalmazzon: (i/n) ")
-        print(kerdes)
+        # print(kerdes)
 
     if kerdes == "i":
         return ["0","1","2","3","4","5","6","7","8","9"]
@@ -68,6 +68,8 @@ def osszerak(jelek, hossz):
         db = jelek[elemSzam]
         # print(db)
         vissza = vissza + db
+        # print(str(i) + " - " + vissza )
+
     return vissza
 
 def elemszam2():
@@ -85,3 +87,4 @@ jelek = jelek + szamok2()
 jelek = jelek + kulunlegesJelek2()
 jelszo= osszerak(jelek, hossz)
 print(jelszo)
+
