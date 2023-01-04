@@ -41,6 +41,22 @@ def jelkeszletOsszerako(elemValasztoSor):
             kulonlegesJelek = ["^","&","@","#","$","-","_","!","$","%","~","?","=",">","<",".","*",";","+",":"]
     return nagybetu + kisbetu + szam + kulonlegesJelek
 
+def kever(jelkeszlet):
+
+    for i in range(0,len(jelkeszlet)):
+        temp = jelkeszlet[i]
+
+        elemszam= random.randint(0, len(jelkeszlet)-1)
+        masodikElem = jelkeszlet[elemszam]
+
+        jelkeszlet[elemszam] = temp
+        jelkeszlet[i] = masodikElem
+
+    return jelkeszlet
+
+
+
+
 elemValasztoSor = elemvalasztoSor()
 listaKiiro("Választó sor:",elemValasztoSor)
 # Sort ellenőrizni, hogy ne legyen mindegyik 0
@@ -48,8 +64,8 @@ listaKiiro("Választó sor:",elemValasztoSor)
 jelkeszlet = jelkeszletOsszerako(elemValasztoSor)
 listaKiiro("Jelkészlet ", jelkeszlet)
 
-
-
+jelkeszlet = kever(jelkeszlet)
+listaKiiro("Jelkészlet Kevert", jelkeszlet)
 
 jelszo = osszerak(elemValasztoSor[4], jelkeszlet)
 print(jelszo)
