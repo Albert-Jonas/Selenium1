@@ -1,8 +1,10 @@
-
 import time
+import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from openpyxl import Workbook, load_workbook
+
+logging.basicConfig(filename='example.log', filemode='w', encoding='utf-8', level=logging.DEBUG)
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--lang= hu")
@@ -38,13 +40,14 @@ def biralat(szam3, eredmenystr, i):
     except AssertionError as e:
         ws['F' + str(i)] = "Fail"
         ws['G' + str(i)] = str(e)
+        logging.error("Logfile entry")
     else:
         ws['F' + str(i)] = "Pass"
 
 # Összeadás művelet
 def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
-    test(szam1, szam2, "Összeadás")
+    test(szam1, szam2, "Plus")
     time.sleep(2)
     eredmenystr = eredmeny()
     biralat(szam3, eredmenystr,i)
@@ -53,7 +56,7 @@ def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3, i):
 # Kivonás művelet
 def kivonas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
-    test(szam1, szam2, "Kivonás")
+    test(szam1, szam2, "Minus")
     time.sleep(2)
     eredmenystr = eredmeny()
     biralat(szam3, eredmenystr, i)
@@ -62,7 +65,7 @@ def kivonas_pozitiv_szamokkal(szam1, szam2, szam3, i):
 # Szorzás művelet
 def szorzas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
-    test(szam1, szam2, "Szorzás")
+    test(szam1, szam2, "Times")
     time.sleep(2)
     eredmenystr = eredmeny()
     biralat(szam3,eredmenystr, i)
@@ -70,7 +73,7 @@ def szorzas_pozitiv_szamokkal(szam1, szam2, szam3, i):
 # Összeadás művelet
 def osztas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
-    test(szam1, szam2, "Osztás")
+    test(szam1, szam2, "Divide")
     time.sleep(2)
     eredmenystr = eredmeny()
     biralat(szam3, eredmenystr, i)
