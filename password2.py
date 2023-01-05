@@ -18,8 +18,10 @@ def elemvalasztoSor():
 def osszerak(hossz, jelkeszlet):
     vissza = ""
     for i in range(0, hossz):
-        rndSzam = random.randint(0, len(jelkeszlet))
+        rndSzam = random.randint(0, len(jelkeszlet)-1)
         # print(jelkeszlet[rndSzam])
+        # print(len(jelkeszlet))
+        # print(rndSzam)
         vissza += jelkeszlet[rndSzam]
     return vissza
 
@@ -53,9 +55,6 @@ def kever(jelkeszlet):
         jelkeszlet[i] = masodikElem
 
     return jelkeszlet
-
-
-
 
 elemValasztoSor = elemvalasztoSor()
 listaKiiro("Választó sor:",elemValasztoSor)

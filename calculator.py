@@ -4,8 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from openpyxl import Workbook, load_workbook
 
-logging.basicConfig(filename='example.log', filemode='w', encoding='utf-8', level=logging.DEBUG)
-
+logging.basicConfig(filename='calc_Debug.log', filemode='w', encoding='utf-8', level=logging.DEBUG)
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--lang= hu")
 
@@ -47,7 +46,7 @@ def biralat(szam3, eredmenystr, i):
 # Összeadás művelet
 def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
-    test(szam1, szam2, "Plus")
+    test(szam1, szam2, "Összeadás")
     time.sleep(2)
     eredmenystr = eredmeny()
     biralat(szam3, eredmenystr,i)
@@ -56,7 +55,7 @@ def osszeadas_pozitiv_szamokkal(szam1, szam2, szam3, i):
 # Kivonás művelet
 def kivonas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
-    test(szam1, szam2, "Minus")
+    test(szam1, szam2, "Kivonás")
     time.sleep(2)
     eredmenystr = eredmeny()
     biralat(szam3, eredmenystr, i)
@@ -65,7 +64,7 @@ def kivonas_pozitiv_szamokkal(szam1, szam2, szam3, i):
 # Szorzás művelet
 def szorzas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
-    test(szam1, szam2, "Times")
+    test(szam1, szam2, "Szorzás")
     time.sleep(2)
     eredmenystr = eredmeny()
     biralat(szam3,eredmenystr, i)
@@ -73,7 +72,7 @@ def szorzas_pozitiv_szamokkal(szam1, szam2, szam3, i):
 # Összeadás művelet
 def osztas_pozitiv_szamokkal(szam1, szam2, szam3, i):
     time.sleep(2)
-    test(szam1, szam2, "Divide")
+    test(szam1, szam2, "Osztás")
     time.sleep(2)
     eredmenystr = eredmeny()
     biralat(szam3, eredmenystr, i)
@@ -92,6 +91,7 @@ def excelReset(ws,wb):
         i = i + 1
 
 # Start
+logging.error("Start")
 driver = startBrowser()
 # tabla , site
 wb = load_workbook('excel.xlsx')
@@ -139,46 +139,3 @@ wb.save('excel.xlsx')
 # Oldal bezárása
 driver.close()
 # driver.close()
-# *************************** Raktár
-
-#osszeadas_pozitiv_szamokkal(10,20,"30")
-#clear()
-#kivonas_pozitiv_szamokkal(20,10,"10")
-#clear()
-#szorzas_pozitiv_szamokkal(10,20,"200")
-#clear()
-#osztas_pozitiv_szamokkal(10,20,"0.5")
-#clear()
-
-# try:
-    #     assert str(szam3) == eredmenystr, "Hibás"
-    # except AssertionError as e:
-    #     ws['F' + str(i)] = "Fail"
-    #     ws['G' + str(i)] = str(e)
-    # else:
-    #     ws['F' + str(i)] = "Pass"
-
-# driver.maximize_window()
-# test(random.randint(0,9999999),random.randint(0,999999),"Kivonás")
-# time.sleep(10)
-
-
-
-
-
-    #ellenőrzés
-    #segédfüggvény kell, ami kiszedi az eredményt a weboldalról és return-el visszaadja
-    #segédfüggvény() == 5
-    #összerakjuk a választ: kiíratjuk, hogy "osszeadas_pozitiv_szamokkal pass/fail fail esetben magyarázat
-
-    #böngésző bezárása
-
-
-
-# osszeadas_pozitiv_szamokkal(random.randint(1,9999999),random.randint(1,999999))
-# osszeadas_pozitiv_szamokkal(10,20)
-# assert "30" == osszeadas_pozitiv_szamokkal(10,20,30)
-
-# Eldönti, hogy a művelet a várt eredményt hozza-e
-
-# assert szam3 == eredmenystr, "Hibás"

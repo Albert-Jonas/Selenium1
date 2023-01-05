@@ -1,5 +1,8 @@
 from random import random, randint
 
+import logging
+
+logging.basicConfig(filename='Password.log', filemode='w', encoding='utf-8', level=logging.INFO)
 def jelkeszlet(jelek):
     print(jelek)
 def kerdesFG(szoveg):
@@ -64,7 +67,7 @@ def osszerak(jelek, hossz):
     vissza = ""
     # jelkeszlet(jelek)
     for i in range(0,int(hossz)):
-        elemSzam = randint(0,len(jelek))
+        elemSzam = randint(0,len(jelek)-1)
         db = jelek[elemSzam]
         # print(db)
         vissza = vissza + db
@@ -79,9 +82,11 @@ def elemszam2():
         # print(vissza)
     return vissza
 
-
+logging.info("Start")
 jelek = kisBetuk()
+logging.info("kisbetük után a jelkészlet :" + jelek)
 hossz = elemszam2()
+logging.info("Password hossza : "+hossz)
 jelek = jelek +  nagyBetuk2()
 jelek = jelek + szamok2()
 jelek = jelek + kulunlegesJelek2()
