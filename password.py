@@ -39,7 +39,7 @@ def szamok2():
     kerdes = "a"
     # jelkeszlet(jelek)
     while (kerdes not in "inIN"):
-        kerdes = kerdesFG("Számokat tartalmazzon: (i/n) ")
+        kerdes = input("Számokat tartalmazzon: (i/n) ")
         # print(kerdes)
 
     if kerdes == "i":
@@ -84,7 +84,7 @@ def elemszam2():
 
 logging.info("Start")
 jelek = kisBetuk()
-logging.info("kisbetük után a jelkészlet :" + jelek)
+
 hossz = elemszam2()
 logging.info("Password hossza : "+hossz)
 jelek = jelek +  nagyBetuk2()
