@@ -15,8 +15,8 @@ lista = driver.find_elements(By.PARTIAL_LINK_TEXT, " ")
 
 for i in range(0, len(lista)):
 
-    credIdValue = lista[i].find_element(By.XPATH("following-sibling::text()"))
+    credIdValue = lista[i].find_elements(By.XPATH("./text"))
     lista[i] = lista[i].text + " " + credIdValue.text
-    print(lista[i])
+    print(lista[i].text.split(" "))
 
 driver.close()
