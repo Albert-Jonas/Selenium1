@@ -23,7 +23,7 @@ def nagyBetuk2():
     kerdes = "a"
     while(kerdes not in "inIN"):
         kerdes = kerdesFG("Nagybetűt tartalmazzon: (i/n) ")
-    if kerdes == "i":
+    if kerdes == "i" or "I":
         return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
                 "U", "V", "W", "X", "Y", "Z"]
     else: return []
