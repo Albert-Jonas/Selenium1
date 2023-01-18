@@ -54,22 +54,19 @@ def kivetellista():
     return visszLista
 
 def szortirozo(kivetelElemek, lista):
-    print("*********************************Szortirozo listály alz kivesz")
+
     for i in kivetelElemek:
         if i in lista:
-            print(i)
-            lista.remove(i)
-    print("********************************* Szortirozo meradáka")
-    for i in lista:
 
-        print(i)
+            lista.remove(i)
+
 
     return lista
 
 def kovertLista(lista):
     visszaLista = []
-    for i in range(0,20):
-    # for i in range(0,len(lista)):
+    # for i in range(0,500):
+    for i in range(0,len(lista)):
         visszaLista.append(lista[i].text)
 
     return visszaLista
@@ -77,7 +74,7 @@ def kovertLista(lista):
 def openBrowser():
     driver = webdriver.Chrome()
     driver.get(link)
-    # driver.minimize_window()
+    driver.minimize_window()
     return driver
 
 # Lista létrehozása a wiki oldalról
@@ -95,18 +92,8 @@ driver = openBrowser()
 lista = koltoLista(driver)
 
 lista = kovertLista(lista)
-
-print("*************************************** lista listálya (konvertált)")
-for i in lista:
-    print(i)
-
-
 kivetelElemek = kivetellista()
 listaM = szortirozo(kivetelElemek, lista)
-print("**********************************Lista mentés előtt")
-for i in listaM:
-    print(i)
-
 excelListaMentes(listaM)
 
 excelMentes()
