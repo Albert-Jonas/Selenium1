@@ -1,0 +1,4 @@
+INFO:root:Start pogram
+INFO:root:Excel tábla ürítés elindúl
+INFO:root:Excel fejléc elkészítés
+INFO:root:['Köktő neve', 'Születési helye', 'Születés időpontja', 'Halála ideje']

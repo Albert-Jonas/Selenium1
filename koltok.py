@@ -1,8 +1,10 @@
-from builtins import print
+import logging
 
 from openpyxl.reader.excel import load_workbook
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+
+logging.basicConfig(filename='koltok.log',filemode='w', encoding='utf-8', level=logging.INFO)
 
 link = "https://hu.wikipedia.org/wiki/Magyar_k%C3%B6lt%C5%91k,_%C3%ADr%C3%B3k_list%C3%A1ja"
 
@@ -16,8 +18,9 @@ excelFejlec= ["Köktő neve", "Születési helye", "Születés időpontja", "Hal
 
 
 # ---------------------------------Excel műveletel
-#Excel tábla kiüritése
+# Excel tábla kiüritése
 def excelUrites():
+    logging.info("Excel tábla ürítés elindúl")
     i = 1
     while (ws['A' + str(i)].value):
         ws['A' + str(i)] = " "
@@ -29,6 +32,8 @@ def excelMentes():
 
 # Excel fejlécek beírása a táblázatba
 def excelFejlecBeallitas():
+    logging.info("Excel fejléc elkészítés")
+    logging.info(excelFejlec)
     ws["A" + "1"] = excelFejlec[0]
     ws["B" + "1"] = excelFejlec[1]
     ws["C" + "1"] = excelFejlec[2]
@@ -86,11 +91,12 @@ def weblapBezarasa():
 
 
 
+
+logging.info("Start pogram")
 excelUrites()
 excelFejlecBeallitas()
 driver = openBrowser()
 lista = koltoLista(driver)
-
 lista = kovertLista(lista)
 kivetelElemek = kivetellista()
 listaM = szortirozo(kivetelElemek, lista)
